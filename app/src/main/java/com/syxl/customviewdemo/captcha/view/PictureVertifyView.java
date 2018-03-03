@@ -181,16 +181,26 @@ public class PictureVertifyView extends AppCompatImageView {
                 if (Math.abs(blockPositionInfo.left - shadowPositionInfo.left + blockSize)<TOLERANCE &&
                         Math.abs(blockPositionInfo.top - shadowPositionInfo.top) <TOLERANCE){
                     state = STATE_ACCESS;
+                    invalidate();
                     Toast.makeText(getContext(),"匹配成功", Toast.LENGTH_SHORT).show();
                 }else {
-                    state = STATE_UNACCESS;
-                    invalidate();
                     Toast.makeText(getContext(),"匹配失败", Toast.LENGTH_SHORT).show();
+                    reset();
                 }
                 break;
         }
         tempX = x;
         tempY = y;
         return true;
+    }
+
+    private void reset() {
+        state = STATE_IDEL;
+        verfitybitmap.recycle();
+        verfitybitmap = null;
+        shadowPositionInfo = null;
+        blockPositionInfo = null;
+        shadowShape = null;
+        invalidate();
     }
 }
