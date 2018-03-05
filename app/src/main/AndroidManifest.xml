@@ -17,6 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".captcha.CaptchaActivity"/>
+        <activity android:name=".DragScrollDetailsLayout.DragScrollDetailsLayoutActivity"/>
+        <activity android:name=".DragScrollDetailsLayout.FragmentTabHostSlidingLayoutActivity"/>
     </application>
 
 </manifest>

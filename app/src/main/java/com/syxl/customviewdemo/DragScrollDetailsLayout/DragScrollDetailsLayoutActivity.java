@@ -1,19 +1,22 @@
-package com.syxl.customviewdemo;
+package com.syxl.customviewdemo.DragScrollDetailsLayout;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.syxl.customviewdemo.DragScrollDetailsLayout.DragScrollDetailsLayoutActivity;
+import com.syxl.customviewdemo.R;
 import com.syxl.customviewdemo.base.MenuAdapter;
 import com.syxl.customviewdemo.base.MenuBean;
-import com.syxl.customviewdemo.captcha.CaptchaActivity;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * Created by likun on 2018/3/5.
+ */
 
+public class DragScrollDetailsLayoutActivity extends AppCompatActivity {
+    private static final String TAG = "DragScrollDetailsLayout";
     private ArrayList<MenuBean> list = new ArrayList<>();
 
     @Override
@@ -21,10 +24,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         RecyclerView rv_list = (RecyclerView) findViewById(R.id.rv_list);
-        list.add(new MenuBean("拼图滑块",CaptchaActivity.class));
-        list.add(new MenuBean("DragScrollDetailsLayout",DragScrollDetailsLayoutActivity.class));
+        list.add(new MenuBean("FragmentTabHostSlidingLayout",FragmentTabHostSlidingLayoutActivity.class));
 
-        rv_list.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        rv_list.setAdapter(new MenuAdapter(MainActivity.this,list));
+        rv_list.setLayoutManager(new LinearLayoutManager(this));
+        rv_list.setAdapter(new MenuAdapter(DragScrollDetailsLayoutActivity.this,list));
     }
 }
