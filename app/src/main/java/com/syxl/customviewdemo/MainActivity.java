@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         RecyclerView rv_list = (RecyclerView) findViewById(R.id.rv_list);
         list.add(new MenuBean("拼图滑块",CaptchaActivity.class));
-        list.add(new MenuBean("DragScrollDetailsLayout",DragScrollDetailsLayoutActivity.class));
+        list.add(new MenuBean("商品详情页拖拽控件",DragScrollDetailsLayoutActivity.class));
 
         rv_list.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         rv_list.setAdapter(new MenuAdapter(MainActivity.this,list));
