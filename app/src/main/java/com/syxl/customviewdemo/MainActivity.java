@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView rv_list = (RecyclerView) findViewById(R.id.rv_list);
         list.add(new MenuBean("拼图滑块",CaptchaActivity.class));
         list.add(new MenuBean("商品详情页拖拽控件",DragScrollDetailsLayoutActivity.class));
+        list.add(new MenuBean("仿知乎创意广告",RvimageadsActivity.class));
         list.add(new MenuBean("小米指南针和时钟",ChaosCompassActivity.class));
 
         rv_list.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
