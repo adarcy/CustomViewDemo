@@ -19,6 +19,7 @@
         <activity android:name=".captcha.CaptchaActivity"/>
         <activity android:name=".DragScrollDetailsLayout.DragScrollDetailsLayoutActivity"/>
         <activity android:name=".DragScrollDetailsLayout.FragmentTabHostSlidingLayoutActivity"/>
+        <activity android:name=".rvimageads.RvimageadsActivity"/>
     </application>
 
 </manifest>
