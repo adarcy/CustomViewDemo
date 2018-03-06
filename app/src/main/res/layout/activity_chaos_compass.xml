@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.syxl.customviewdemo.ChaosCompass.ChaosCompassActivity">
-
-</android.support.constraint.ConstraintLayout>
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_compass"
+        android:layout_marginTop="20dp"
+        android:background="@color/black"
+        android:text="指南针戳这里"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <TextView
+        android:id="@+id/tv_oclock"
+        android:background="@color/ocbg"
+        android:gravity="center"
+        android:text="时钟戳这里"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+</LinearLayout>

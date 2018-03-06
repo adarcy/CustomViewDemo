@@ -5,10 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.syxl.customviewdemo.ChaosCompass.ChaosCompassActivity;
 import com.syxl.customviewdemo.DragScrollDetailsLayout.DragScrollDetailsLayoutActivity;
 import com.syxl.customviewdemo.base.MenuAdapter;
 import com.syxl.customviewdemo.base.MenuBean;
 import com.syxl.customviewdemo.captcha.CaptchaActivity;
+import com.syxl.customviewdemo.rvimageads.RvimageadsActivity;
 
 import java.util.ArrayList;
 
