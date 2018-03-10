@@ -1,5 +1,7 @@
 package com.syxl.customviewdemo.ChaosCompass;
 
+import android.animation.PropertyValuesHolder;
+import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Camera;
@@ -14,6 +16,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.syxl.customviewdemo.R;
@@ -239,12 +242,31 @@ public class ChaosCompassView extends View {
         super.onDraw(canvas);
         mCanvas = canvas;
 
+        set3DMetrix();
         drawText();
         drawCompassOutSide();
         drawCompassCircum();
         drawInnerCricle();
         drawCompassDegreeScale();
         drawCenterText();
+    }
+
+    /**
+     * 设置camera相关
+     */
+    private void set3DMetrix() {
+        mCameraMatrix.reset();
+        mCamera.save();
+        mCamera.rotateX(mCameraRotateX);
+        mCamera.rotateY(mCameraRotateY);
+        mCamera.getMatrix(mCameraMatrix);
+        mCamera.restore();
+        //camera默认旋转是View左上角为旋转中心
+        //所以动作之前要，设置矩阵位置 -mTextHeight-mOutSideRadius
+        mCameraMatrix.preTranslate(-getWidth()/2,-getHeight()/2);
+        //动作之后恢复位置
+        mCameraMatrix.postTranslate(getWidth()/2,getHeight()/2);
+        mCanvas.concat(mCameraMatrix);
     }
 
     private void drawCenterText() {
@@ -394,4 +416,120 @@ public class ChaosCompassView extends View {
         int textWidth = mTextRect.width();
         mCanvas.drawText(text,(width-textWidth)/2,mTextHeight/2, mTextPaint);
     }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                if (mValueAnimator!=null&&mValueAnimator.isRunning()){
+                    mValueAnimator.cancel();
+                }
+                //3D 效果让Camera旋转,获取旋转偏移大小
+                getCameraRotate(event);
+                //获取平移大小
+                getCameraTranslate(event);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                //3D 效果让Camera旋转,获取旋转偏移大小
+                getCameraRotate(event);
+                //获取平移大小
+                getCameraTranslate(event);
+                break;
+            case MotionEvent.ACTION_UP:
+                //松开手 复原动画
+                startRestore();
+                break;
+        }
+        return true;
+    }
+
+    private void startRestore() {
+        final String cameraRotateXName = "cameraRotateX";
+        final String cameraRotateYName = "cameraRotateY";
+        final String canvasTranslateXName = "canvasTranslateX";
+        final String canvasTranslateYName = "canvasTranslateY";
+        PropertyValuesHolder cameraRotateXHolder =
+                PropertyValuesHolder.ofFloat(cameraRotateXName, mCameraRotateX, 0);
+        PropertyValuesHolder cameraRotateYHolder =
+                PropertyValuesHolder.ofFloat(cameraRotateYName, mCameraRotateY, 0);
+        PropertyValuesHolder canvasTranslateXHolder =
+                PropertyValuesHolder.ofFloat(canvasTranslateXName, mCameraTranslateX, 0);
+        PropertyValuesHolder canvasTranslateYHolder =
+                PropertyValuesHolder.ofFloat(canvasTranslateYName, mCameraTranslateY, 0);
+        mValueAnimator = ValueAnimator.ofPropertyValuesHolder(cameraRotateXHolder,
+                cameraRotateYHolder, canvasTranslateXHolder, canvasTranslateYHolder);
+        mValueAnimator.setInterpolator(new TimeInterpolator() {
+            @Override
+            public float getInterpolation(float input) {
+                float f = 0.571429f;
+                return (float) (Math.pow(2, -2 * input) * Math.sin((input - f / 4) * (2 * Math.PI) / f) + 1);
+            }
+        });
+        mValueAnimator.setDuration(1000);
+        mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                mCameraRotateX = (float) animation.getAnimatedValue(cameraRotateXName);
+                mCameraRotateY = (float) animation.getAnimatedValue(cameraRotateYName);
+                mCameraTranslateX = (float) animation.getAnimatedValue(canvasTranslateXName);
+                mCameraTranslateX = (float) animation.getAnimatedValue(canvasTranslateYName);
+            }
+        });
+        mValueAnimator.start();
+    }
+
+    /**
+     * 获取Camera，平移大小
+     * @param event
+     */
+    private void getCameraTranslate(MotionEvent event) {
+        float translateX = (event.getX() - getWidth() / 2);
+        float translateY = (event.getY() - getHeight()/2);
+        //求出此时位移的大小与半径之比
+        float[] percentArr = getPercent(translateX, translateY);
+        //最终位移的大小按比例匀称改变
+        mCameraTranslateX = percentArr[0] * mMaxCameraTranslate;
+        mCameraTranslateY = percentArr[1] * mMaxCameraTranslate;
+    }
+
+    /**
+     * 让Camera旋转,获取旋转偏移大小
+     * @param event
+     */
+    private void getCameraRotate(MotionEvent event) {
+        float mRotateX = -(event.getY()-(getHeight())/2);
+        float mRotateY = (event.getX()-getWidth()/2);
+        //求出旋转大小与半径之比
+        float[] percentArr = getPercent(mRotateX,mRotateY);
+        mCameraRotateX = percentArr[0]*mMaxCameraRotate;
+        mCameraRotateY = percentArr[1]*mMaxCameraRotate;
+    }
+
+    /**
+     * 获取比例
+     * @param mCameraRotateX
+     * @param mCameraRotateY
+     * @return
+     */
+    private float[] getPercent(float mCameraRotateX, float mCameraRotateY) {
+        float[] percentArr = new float[2];
+        float percentX = mCameraRotateX/width;
+        float percentY = mCameraRotateY/width;
+        //处理一下比例值
+        if (percentX > 1) {
+            percentX = 1;
+        } else if (percentX < -1) {
+            percentX = -1;
+        }
+        if (percentY > 1) {
+            percentY = 1;
+        } else if (percentY < -1) {
+            percentY = -1;
+        }
+        percentArr[0] = percentX;
+        percentArr[1] = percentY;
+        return percentArr;
+    }
+
 }
