@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.syxl.customviewdemo.ChaosCompass.ChaosCompassActivity;
 import com.syxl.customviewdemo.DragScrollDetailsLayout.DragScrollDetailsLayoutActivity;
+import com.syxl.customviewdemo.GALeafLoading.LeafLoadingActivity;
 import com.syxl.customviewdemo.base.MenuAdapter;
 import com.syxl.customviewdemo.base.MenuBean;
 import com.syxl.customviewdemo.captcha.CaptchaActivity;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(new MenuBean("商品详情页拖拽控件",DragScrollDetailsLayoutActivity.class));
         list.add(new MenuBean("仿知乎创意广告",RvimageadsActivity.class));
         list.add(new MenuBean("小米指南针和时钟",ChaosCompassActivity.class));
+        list.add(new MenuBean("树叶loading效果",LeafLoadingActivity.class));
 
         rv_list.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         rv_list.setAdapter(new MenuAdapter(MainActivity.this,list));

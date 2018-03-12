@@ -16,13 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".captcha.CaptchaActivity"/>
-        <activity android:name=".DragScrollDetailsLayout.DragScrollDetailsLayoutActivity"/>
-        <activity android:name=".DragScrollDetailsLayout.FragmentTabHostSlidingLayoutActivity"/>
-        <activity android:name=".rvimageads.RvimageadsActivity"/>
-        <activity android:name=".ChaosCompass.ChaosCompassActivity"/>
-        <activity android:name=".ChaosCompass.CompassActivity"/>
-        <activity android:name=".ChaosCompass.OclockActivity"/>
+        <activity android:name=".captcha.CaptchaActivity" />
+        <activity android:name=".DragScrollDetailsLayout.DragScrollDetailsLayoutActivity" />
+        <activity android:name=".DragScrollDetailsLayout.FragmentTabHostSlidingLayoutActivity" />
+        <activity android:name=".rvimageads.RvimageadsActivity" />
+        <activity android:name=".ChaosCompass.ChaosCompassActivity" />
+        <activity android:name=".ChaosCompass.CompassActivity" />
+        <activity android:name=".ChaosCompass.OclockActivity" />
+        <activity android:name=".GALeafLoading.LeafLoadingActivity"></activity>
     </application>
 
 </manifest>
