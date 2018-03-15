@@ -10,6 +10,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.syxl.customviewdemo.R;
@@ -69,7 +70,7 @@ public class LeafLoadingView extends View {
     // 所绘制的进度条部分的宽度
     private int mProgressWidth;
     // 当前所在的绘制的进度条的位置
-    private int mCurrentProgressPosition=10;
+    private int mCurrentProgressPosition=0;
     // 弧形的半径
     private int mArcRadius;
 
@@ -154,6 +155,7 @@ public class LeafLoadingView extends View {
 
         drawProgressAndLeafs(canvas);
         canvas.drawBitmap(mOuterBitmap,mOuterSrcRect,mOuterDestRect,mBitmapPaint);
+        postInvalidate();
     }
 
     private void drawProgressAndLeafs(Canvas canvas) {
@@ -161,25 +163,38 @@ public class LeafLoadingView extends View {
             mProgress = 0;
         }
         mCurrentProgressPosition = mProgressWidth * mProgress/TOTAL_PROGRESS;
+        Log.e(TAG,"mCurrentProgressPosition ="+mCurrentProgressPosition);
+        Log.e(TAG,"mArcRadius ="+mArcRadius);
         if (mCurrentProgressPosition < mArcRadius) {
             canvas.drawArc(mArcRectF,90,180,false,mWhitePaint);
             mWhiteRectF.left = mLeftMargin+mArcRadius;
             canvas.drawRect(mWhiteRectF,mWhitePaint);
 
             //leafs
+            drawLeafs(canvas);
 
             //orange
-            double acos = Math.acos((mArcRadius - mCurrentProgressPosition) / mArcRadius);
+            double acos = Math.acos((mArcRadius - mCurrentProgressPosition) / (float)mArcRadius);
             int degrees = (int) Math.toDegrees(acos);//弧度转角度
             int angle = 180 - degrees;
             int sweep = 2*degrees;
+            Log.i(TAG, "startAngle = " + angle);
+
             canvas.drawArc(mArcRectF,angle,sweep,false,mOrangePaint);
         }else {
-            canvas.drawArc(mArcRectF,90,180,false,mOrangePaint);
-            canvas.drawRect(mOrangeRectF,mOrangePaint);
             mWhiteRectF.left = mLeftMargin + mCurrentProgressPosition;
             canvas.drawRect(mWhiteRectF,mWhitePaint);
+            drawLeafs(canvas);
+
+            canvas.drawArc(mArcRectF,90,180,false,mOrangePaint);
+            mOrangeRectF.left = mLeftMargin + mArcRadius;
+            mOrangeRectF.right = mLeftMargin + mCurrentProgressPosition;
+            canvas.drawRect(mOrangeRectF,mOrangePaint);
         }
+    }
+
+    private void drawLeafs(Canvas canvas) {
+
     }
 
     /**
