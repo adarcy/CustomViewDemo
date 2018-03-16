@@ -16,6 +16,10 @@ import android.view.View;
 import com.syxl.customviewdemo.R;
 import com.syxl.customviewdemo.utils.UiUtils;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+
 /**
  * Created by likun on 2018/3/13.
  */
@@ -77,9 +81,9 @@ public class LeafLoadingView extends View {
     // arc的右上角的x坐标，也是矩形x坐标的起始点
     private int mArcRightLocation;
     // 用于产生叶子信息
-//    private LeafFactory mLeafFactory;
+    private LeafFactory mLeafFactory;
 //     产生出的叶子信息
-//    private List<Leaf> mLeafInfos;
+    private List<Leaf> mLeafInfos;
     // 用于控制随机增加的时间不抱团
     private int mAddTime;
 
@@ -100,6 +104,9 @@ public class LeafLoadingView extends View {
         mLeafRotateTime = LEAF_ROTATE_TIME;
         initPaint();
         initBitmap();
+
+        mLeafFactory = new LeafFactory();
+        mLeafInfos = mLeafFactory.generateLeafs(6);
     }
 
     private void initBitmap() {
@@ -194,7 +201,88 @@ public class LeafLoadingView extends View {
     }
 
     private void drawLeafs(Canvas canvas) {
+        long currentTime = System.currentTimeMillis();
+        for (int i = 0; i < mLeafInfos.size(); i++) {
+            Leaf leaf = mLeafInfos.get(i);
+            if (currentTime > leaf.startTime && leaf.startTime != 0) {
 
+            }
+        }
+    }
+
+    //区分不同的振幅
+    enum StartType{
+        MIDDLE,LITTLE,BIG
+    }
+
+    private class Leaf {
+
+        // 在绘制部分的位置
+        float x, y;
+        // 控制叶子飘动的幅度
+        StartType type;
+        // 旋转角度
+        int rotateAngle;
+        // 旋转方向--0代表顺时针，1代表逆时针
+        int rotateDirection;
+        // 起始时间(ms)
+        long startTime;
+    }
+
+    private class LeafFactory{
+        private static final int MAX_LEAFS = 6;
+        Random random = new Random();
+
+        // 生成一个叶子信息
+        public Leaf generateLeaf(){
+            Leaf leaf = new Leaf();
+            StartType type = StartType.MIDDLE;
+            int randomtype = random.nextInt(3);
+            switch (randomtype) {
+                case 0:
+                break;
+                case 1:
+                    type = StartType.LITTLE;
+                    break;
+                case 2:
+                    type = StartType.BIG;
+                    break;
+            }
+            leaf.type = type;
+            leaf.rotateDirection = random.nextInt(2);
+            leaf.rotateAngle = random.nextInt(360);
+            // 为了产生交错的感觉，让开始的时间有一定的随机性
+            mAddTime += random.nextInt((int) (LEAF_FLOAT_TIME * 1.5));
+            leaf.startTime = System.currentTimeMillis() + mAddTime;
+            return leaf;
+        }
+
+        // 根据传入的叶子数量产生叶子信息
+        public List<Leaf> generateLeafs(int leafSize){
+            List<Leaf> leafs = new LinkedList();
+            for (int i = 0; i < leafSize; i++) {
+                leafs.add(generateLeaf());
+            }
+            return leafs;
+        }
+
+        // 通过叶子信息获取当前叶子的Y值
+        private int getLocationY(Leaf leaf) {
+            // y = A(wx+Q)+h
+            float w = (float) (Math.PI*2/(float)mProgressWidth);
+            float a  = mMiddleAmplitude;
+            switch (leaf.type) {
+                case MIDDLE:
+                    break;
+                case BIG:
+                    a = mMiddleAmplitude + mAmplitudeDisparity;
+                    break;
+                case LITTLE:
+                    a = mMiddleAmplitude - mAmplitudeDisparity;
+                    break;
+            }
+            return (int) (a*Math.sin(w*leaf.x)+mArcRadius*2/3);
+        }
     }
 
     /**
