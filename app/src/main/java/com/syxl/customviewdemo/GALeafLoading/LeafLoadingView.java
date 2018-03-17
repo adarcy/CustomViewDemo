@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -201,13 +202,61 @@ public class LeafLoadingView extends View {
     }
 
     private void drawLeafs(Canvas canvas) {
+        mLeafRotateTime = mLeafRotateTime <= 0 ? LEAF_ROTATE_TIME : mLeafRotateTime;
         long currentTime = System.currentTimeMillis();
         for (int i = 0; i < mLeafInfos.size(); i++) {
             Leaf leaf = mLeafInfos.get(i);
             if (currentTime > leaf.startTime && leaf.startTime != 0) {
+                getLeafLocation(leaf,currentTime);
+                canvas.save();
+                float transX = mLeftMargin + leaf.x;
+                float transY = mLeftMargin + leaf.y;
+                Matrix matrix = new Matrix();
+                matrix.postTranslate(transX, transY);
 
+                float rotateFraction = ((currentTime-leaf.startTime)%LEAF_ROTATE_TIME)/(float)LEAF_ROTATE_TIME;
+                int angle = (int) (rotateFraction*360);
+                int rotate = leaf.rotateDirection == 0? angle+leaf.rotateAngle : -angle+leaf.rotateAngle;
+                matrix.postRotate(rotate,transX+mLeafWidth/2,transY+mLeafHeight/2);
+                canvas.drawBitmap(mLeafBitmap,matrix,mBitmapPaint);
+                canvas.restore();
+            }else {
+                continue;
             }
         }
+    }
+
+    private void getLeafLocation(Leaf leaf, long currentTime) {
+        long intervalTime = currentTime - leaf.startTime;
+        mLeafFloatTime = mLeafRotateTime<=0?LEAF_FLOAT_TIME:mLeafFloatTime;
+        if (intervalTime < 0) {
+            return;
+        } else if (intervalTime > mLeafFloatTime) {
+            leaf.startTime = System.currentTimeMillis() + new Random().nextInt((int) mLeafFloatTime);
+        }
+        float fraction = intervalTime/(float)mLeafFloatTime;
+        leaf.x = mProgressWidth - mProgressWidth*fraction;
+        Log.e(TAG, "leaf.x = " + leaf.x);
+        Log.e(TAG, "fraction = " + fraction);
+        leaf.y = getLocationY(leaf);
+    }
+
+    // 通过叶子信息获取当前叶子的Y值
+    private int getLocationY(Leaf leaf) {
+        // y = A(wx+Q)+h
+        float w = (float) (Math.PI*2/(float)mProgressWidth);
+        float a  = mMiddleAmplitude;
+        switch (leaf.type) {
+            case MIDDLE:
+                break;
+            case BIG:
+                a = mMiddleAmplitude + mAmplitudeDisparity;
+                break;
+            case LITTLE:
+                a = mMiddleAmplitude - mAmplitudeDisparity;
+                break;
+        }
+        return (int) (a*Math.sin(w*leaf.x)+mArcRadius*2/3);
     }
 
     //区分不同的振幅
@@ -252,7 +301,8 @@ public class LeafLoadingView extends View {
             leaf.rotateDirection = random.nextInt(2);
             leaf.rotateAngle = random.nextInt(360);
             // 为了产生交错的感觉，让开始的时间有一定的随机性
-            mAddTime += random.nextInt((int) (LEAF_FLOAT_TIME * 1.5));
+            mLeafFloatTime = mLeafFloatTime <= 0 ? LEAF_FLOAT_TIME : mLeafFloatTime;
+            mAddTime += random.nextInt((int) (mLeafFloatTime * 2));
             leaf.startTime = System.currentTimeMillis() + mAddTime;
             return leaf;
         }
@@ -264,24 +314,6 @@ public class LeafLoadingView extends View {
                 leafs.add(generateLeaf());
             }
             return leafs;
-        }
-
-        // 通过叶子信息获取当前叶子的Y值
-        private int getLocationY(Leaf leaf) {
-            // y = A(wx+Q)+h
-            float w = (float) (Math.PI*2/(float)mProgressWidth);
-            float a  = mMiddleAmplitude;
-            switch (leaf.type) {
-                case MIDDLE:
-                    break;
-                case BIG:
-                    a = mMiddleAmplitude + mAmplitudeDisparity;
-                    break;
-                case LITTLE:
-                    a = mMiddleAmplitude - mAmplitudeDisparity;
-                    break;
-            }
-            return (int) (a*Math.sin(w*leaf.x)+mArcRadius*2/3);
         }
     }
 
