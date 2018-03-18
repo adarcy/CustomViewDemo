@@ -23,7 +23,8 @@
         <activity android:name=".ChaosCompass.ChaosCompassActivity" />
         <activity android:name=".ChaosCompass.CompassActivity" />
         <activity android:name=".ChaosCompass.OclockActivity" />
-        <activity android:name=".GALeafLoading.LeafLoadingActivity"></activity>
+        <activity android:name=".GALeafLoading.LeafLoadingActivity" />
+        <activity android:name=".span.SpanActivity"></activity>
     </application>
 
 </manifest>

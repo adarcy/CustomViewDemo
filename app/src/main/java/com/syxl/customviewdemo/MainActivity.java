@@ -12,6 +12,7 @@ import com.syxl.customviewdemo.base.MenuAdapter;
 import com.syxl.customviewdemo.base.MenuBean;
 import com.syxl.customviewdemo.captcha.CaptchaActivity;
 import com.syxl.customviewdemo.rvimageads.RvimageadsActivity;
+import com.syxl.customviewdemo.span.SpanActivity;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(new MenuBean("仿知乎创意广告",RvimageadsActivity.class));
         list.add(new MenuBean("小米指南针和时钟",ChaosCompassActivity.class));
         list.add(new MenuBean("树叶loading效果",LeafLoadingActivity.class));
+        list.add(new MenuBean("TextView 图文混排 & 炫酷的段落级Span解析",SpanActivity.class));
 
         rv_list.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         rv_list.setAdapter(new MenuAdapter(MainActivity.this,list));
