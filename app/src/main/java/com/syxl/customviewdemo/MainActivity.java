@@ -11,6 +11,7 @@ import com.syxl.customviewdemo.GALeafLoading.LeafLoadingActivity;
 import com.syxl.customviewdemo.base.MenuAdapter;
 import com.syxl.customviewdemo.base.MenuBean;
 import com.syxl.customviewdemo.captcha.CaptchaActivity;
+import com.syxl.customviewdemo.dragfillquestion.DragActivity;
 import com.syxl.customviewdemo.rvimageads.RvimageadsActivity;
 import com.syxl.customviewdemo.span.SpanActivity;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(new MenuBean("小米指南针和时钟",ChaosCompassActivity.class));
         list.add(new MenuBean("树叶loading效果",LeafLoadingActivity.class));
         list.add(new MenuBean("TextView 图文混排 & 炫酷的段落级Span解析",SpanActivity.class));
+        list.add(new MenuBean("拖拽完成选词",DragActivity.class));
 
         rv_list.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         rv_list.setAdapter(new MenuAdapter(MainActivity.this,list));

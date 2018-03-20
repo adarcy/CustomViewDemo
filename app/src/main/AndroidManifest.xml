@@ -24,7 +24,8 @@
         <activity android:name=".ChaosCompass.CompassActivity" />
         <activity android:name=".ChaosCompass.OclockActivity" />
         <activity android:name=".GALeafLoading.LeafLoadingActivity" />
-        <activity android:name=".span.SpanActivity"></activity>
+        <activity android:name=".span.SpanActivity" />
+        <activity android:name=".dragfillquestion.DragActivity"></activity>
     </application>
 
 </manifest>
