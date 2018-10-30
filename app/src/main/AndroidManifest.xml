@@ -26,6 +26,7 @@
         <activity android:name=".GALeafLoading.LeafLoadingActivity" />
         <activity android:name=".span.SpanActivity" />
         <activity android:name=".dragfillquestion.DragActivity"></activity>
+        <activity android:name=".fragmentAnimation.FragmentTransactionActivity"></activity>
     </application>
 
 </manifest>

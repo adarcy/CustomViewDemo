@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.trickyandroid.fragmenttranslate.app.MainActivity">
+    
+    <item android:id="@+id/add"
+        android:title="add"
+        android:icon="@drawable/ic_action_view_as_list"
+        app:showAsAction="withText" />
+
+    <item android:id="@+id/show"
+        android:title="show"
+        android:icon="@drawable/ic_action_view_as_list"
+        app:showAsAction="withText" />
+
+    <item android:id="@+id/hide"
+        android:title="hide"
+        android:icon="@drawable/ic_action_view_as_list"
+        app:showAsAction="withText" />
+</menu>

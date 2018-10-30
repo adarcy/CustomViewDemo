@@ -8,4 +8,6 @@
     <string name="current_rotate_time">修改旋转速度，当前%1$s</string>
     <string name="delete_progress_btn_text">去除进度条,玩转弧线</string>
     <string name="increase_the_progress_btn_text">增加进度:</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_show_list">Show list</string>
 </resources>
