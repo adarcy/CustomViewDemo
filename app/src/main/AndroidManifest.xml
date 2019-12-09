@@ -27,6 +27,7 @@
         <activity android:name=".span.SpanActivity" />
         <activity android:name=".dragfillquestion.DragActivity"></activity>
         <activity android:name=".fragmentAnimation.FragmentTransactionActivity"></activity>
+        <activity android:name=".TestActivity"></activity>
     </application>
 
 </manifest>
