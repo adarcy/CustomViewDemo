@@ -1,4 +1,4 @@
-package com.syxl.customviewdemo
+package com.syxl.customviewdemo.widgets
 
 import android.content.Context
 import android.graphics.Canvas

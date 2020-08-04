@@ -11,11 +11,13 @@ import com.blankj.utilcode.util.LogUtils
 import com.syxl.customviewdemo.ChaosCompass.ChaosCompassActivity
 import com.syxl.customviewdemo.DragScrollDetailsLayout.DragScrollDetailsLayoutActivity
 import com.syxl.customviewdemo.GALeafLoading.LeafLoadingActivity
+import com.syxl.customviewdemo.activity.ScrollerViewPagerActivity
 import com.syxl.customviewdemo.base.MenuAdapter
 import com.syxl.customviewdemo.base.MenuBean
 import com.syxl.customviewdemo.captcha.CaptchaActivity
 import com.syxl.customviewdemo.dragfillquestion.DragActivity
 import com.syxl.customviewdemo.fragmentAnimation.FragmentTransactionActivity
+import com.syxl.customviewdemo.itemDecorator.ItemDecorationActivity
 import com.syxl.customviewdemo.rvimageads.RvimageadsActivity
 import com.syxl.customviewdemo.span.SpanActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -38,7 +40,10 @@ class MainActivity : AppCompatActivity() {
         list.add(MenuBean("TextView 图文混排 & 炫酷的段落级Span解析", SpanActivity::class.java))
         list.add(MenuBean("拖拽完成选词", DragActivity::class.java))
         list.add(MenuBean("fragment切换动画", FragmentTransactionActivity::class.java))
+        list.add(MenuBean("ScrollerViewPager", ScrollerViewPagerActivity::class.java))
         list.add(MenuBean("test", TestActivity::class.java))
+        list.add(MenuBean("web", WebViewActivity::class.java))
+        list.add(MenuBean("ItemDecoration", ItemDecorationActivity::class.java))
 
         rv_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_list.adapter = MenuAdapter(this@MainActivity, list)
@@ -47,6 +52,9 @@ class MainActivity : AppCompatActivity() {
         val scaledDoubleTapSlop = ViewConfiguration.get(this).scaledDoubleTapSlop
         LogUtils.e("scaledDoubleTapSlop=$scaledDoubleTapSlop")
 
+        btn_kotlin.setOnClickListener {
+            KotlinActivity.actionStart(this, "Kotlin", "hello")
+        }
 
     }
 }

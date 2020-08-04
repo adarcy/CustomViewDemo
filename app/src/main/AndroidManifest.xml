@@ -2,13 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.syxl.customviewdemo">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".KotlinActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,9 +29,12 @@
         <activity android:name=".ChaosCompass.OclockActivity" />
         <activity android:name=".GALeafLoading.LeafLoadingActivity" />
         <activity android:name=".span.SpanActivity" />
-        <activity android:name=".dragfillquestion.DragActivity"></activity>
-        <activity android:name=".fragmentAnimation.FragmentTransactionActivity"></activity>
-        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".dragfillquestion.DragActivity" />
+        <activity android:name=".fragmentAnimation.FragmentTransactionActivity" />
+        <activity android:name=".activity.ScrollerViewPagerActivity" />
+        <activity android:name=".TestActivity" />
+        <activity android:name=".WebViewActivity" />
+        <activity android:name=".itemDecorator.ItemDecorationActivity" />
     </application>
 
 </manifest>
