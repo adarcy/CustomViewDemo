@@ -13,6 +13,10 @@
         android:layout_height="50dp"
         android:text="button1"/>
 
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:elevation="10dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_list"
