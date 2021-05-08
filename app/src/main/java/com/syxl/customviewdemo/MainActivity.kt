@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewConfiguration
+import android.widget.Toast
 
 import com.blankj.utilcode.util.LogUtils
 import com.syxl.customviewdemo.ChaosCompass.ChaosCompassActivity
@@ -56,5 +57,8 @@ class MainActivity : AppCompatActivity() {
             KotlinActivity.actionStart(this, "Kotlin", "hello")
         }
 
+//7.1.1   Toast  WindowManager$BadTokenException 测试
+        Toast.makeText(this, "123", Toast.LENGTH_LONG).show();
+        Thread.sleep(5*1000);
     }
 }
