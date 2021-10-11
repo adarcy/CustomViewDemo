@@ -4,6 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+    <com.syxl.customviewdemo.widgets.TestView
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
     <com.syxl.customviewdemo.widgets.RadarGradientView
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -12,6 +17,8 @@
     <com.syxl.customviewdemo.widgets.XfermodeView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+
 
 
 </LinearLayout>

@@ -11,7 +11,13 @@
         android:id="@+id/btn_kotlin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="button1"/>
+        android:text="btn_kotlin"/>
+
+    <Button
+        android:id="@+id/btn_tailor"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="btn_tailor"/>
 
 
     <android.support.v7.widget.RecyclerView

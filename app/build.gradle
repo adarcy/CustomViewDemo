@@ -2,12 +2,15 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.jakewharton.hugo'
+apply plugin: 'com.nzy.plugin'
+
 
 android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.syxl.customviewdemo"
-        minSdkVersion 17
+        minSdkVersion 18
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -19,6 +22,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        targetCompatibility = "8"
+        sourceCompatibility = "8"
+    }
+
+//    hugo {
+//    enabled false
+//    }
+
 }
 
 dependencies {
@@ -37,4 +50,25 @@ dependencies {
     //kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    implementation 'com.github.markzhai:blockcanary-android:1.4.1'
+    implementation 'com.jaeger.statusbarutil:library:1.5.1'
+    debugImplementation 'com.github.whataa:pandora:v2.1.0'
+    implementation 'com.bytedance.tailor:library:1.0.2'
+//    implementation 'androidx.core:core:1.3.0'
+    compile 'com.android.tools.build:gradle:3.0.1'
+
+//    implementation 'org.ow2.asm:asm:9.1'
+//    implementation 'org.ow2.asm:asm-commons:9.1'
+
+
+
+
+
 }
+
+
+
+
+
+
+
