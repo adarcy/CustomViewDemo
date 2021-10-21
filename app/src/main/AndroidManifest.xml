@@ -44,6 +44,7 @@
         <activity android:name=".WebViewActivity" />
         <activity android:name=".itemDecorator.ItemDecorationActivity" />
         <activity android:name=".elemenestedscroll.ElemeActivity"/>
+        <activity android:name=".views.ballview.BallViewActivity"/>
     </application>
 
 </manifest>

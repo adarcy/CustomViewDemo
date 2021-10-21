@@ -5,6 +5,8 @@ import android.app.Application;
 import com.syxl.customviewdemo.utils.ActivityThreadHelper;
 import com.syxl.customviewdemo.utils.SafeToastService;
 
+import tech.linjiang.pandora.Pandora;
+
 /**
  * @Description:
  * @Author: likun
@@ -21,5 +23,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ActivityThreadHelper.tryHackActivityThreadH();
+
+        //        BlockCanary.install(this, BlockCanaryContext()).start()
+        Pandora.get().open();
     }
 }

@@ -34,6 +34,7 @@ import com.syxl.customviewdemo.fragmentAnimation.FragmentTransactionActivity
 import com.syxl.customviewdemo.itemDecorator.ItemDecorationActivity
 import com.syxl.customviewdemo.rvimageads.RvimageadsActivity
 import com.syxl.customviewdemo.span.SpanActivity
+import com.syxl.customviewdemo.views.ballview.BallViewActivity
 import hugo.weaving.DebugLog
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
@@ -67,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         list.add(MenuBean("web", WebViewActivity::class.java))
         list.add(MenuBean("ItemDecoration", ItemDecorationActivity::class.java))
         list.add(MenuBean("Eleme", ElemeActivity::class.java))
+        list.add(MenuBean("BallView", BallViewActivity::class.java))
 
         rv_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_list.adapter = MenuAdapter(this@MainActivity, list)
