@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         list.add(MenuBean("ItemDecoration", ItemDecorationActivity::class.java))
         list.add(MenuBean("Eleme", ElemeActivity::class.java))
         list.add(MenuBean("BallView", BallViewActivity::class.java))
+        list.add(MenuBean("LooperPrinter", LooperPrinterActivity::class.java))
 
         rv_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_list.adapter = MenuAdapter(this@MainActivity, list)

@@ -45,6 +45,7 @@
         <activity android:name=".itemDecorator.ItemDecorationActivity" />
         <activity android:name=".elemenestedscroll.ElemeActivity"/>
         <activity android:name=".views.ballview.BallViewActivity"/>
+        <activity android:name=".LooperPrinterActivity"/>
     </application>
 
 </manifest>
