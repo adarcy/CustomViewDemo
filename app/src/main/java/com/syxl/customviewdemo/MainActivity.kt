@@ -24,6 +24,7 @@ import com.bytedance.tailor.Tailor
 import com.syxl.customviewdemo.ChaosCompass.ChaosCompassActivity
 import com.syxl.customviewdemo.DragScrollDetailsLayout.DragScrollDetailsLayoutActivity
 import com.syxl.customviewdemo.GALeafLoading.LeafLoadingActivity
+import com.syxl.customviewdemo.activity.RxJava2Activity
 import com.syxl.customviewdemo.activity.ScrollerViewPagerActivity
 import com.syxl.customviewdemo.base.MenuAdapter
 import com.syxl.customviewdemo.base.MenuBean
@@ -70,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         list.add(MenuBean("Eleme", ElemeActivity::class.java))
         list.add(MenuBean("BallView", BallViewActivity::class.java))
         list.add(MenuBean("LooperPrinter", LooperPrinterActivity::class.java))
+        list.add(MenuBean("RxJava2", RxJava2Activity::class.java))
 
         rv_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_list.adapter = MenuAdapter(this@MainActivity, list)

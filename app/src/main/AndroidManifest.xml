@@ -46,6 +46,7 @@
         <activity android:name=".elemenestedscroll.ElemeActivity"/>
         <activity android:name=".views.ballview.BallViewActivity"/>
         <activity android:name=".LooperPrinterActivity"/>
+        <activity android:name=".activity.RxJava2Activity"/>
     </application>
 
 </manifest>
