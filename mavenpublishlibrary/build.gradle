@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'maven'
+}
+
+task androidSourcesJar(type: Jar) {
+    if (project.hasProperty("kotlin")) {
+        from android.sourceSets.main.java.getSrcDirs()
+    } else if (project.hasProperty("android")) {
+        from android.sourceSets.main.java.sourceFiles
+    } else {
+        println project
+        from sourceSets.main.allSource
+    }
+    classifier = 'sources'
+}
+
+artifacts {
+    archives androidSourcesJar
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+//            repository(url:"http://10.60.0.100:8081/repository/okayclient_snapshot") {
+//                authentication(userName: "lichao", password: "123456")
+//            }
+            def deployPath = file("../repo")
+            repository(url: "file://${deployPath.absolutePath}")
+
+            pom.project {
+                groupId "com.syxl.maven"
+                artifactId "maven"
+                version "0.0.3"
+            }
+        }
+    }
+}
+
+android {
+    compileSdkVersion 30
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.tencent:mmkv-static:1.0.24'
+
+}

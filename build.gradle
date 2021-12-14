@@ -6,10 +6,14 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {
+            // 会在 build.gradle 同目录生成文件夹
+            url "/Users/kunli/github/android/CustomViewDemo/repo"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
 
 
@@ -22,9 +26,14 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenLocal()
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        maven {
+            // 会在 build.gradle 同目录生成文件夹
+            url "/Users/kunli/github/android/CustomViewDemo/repo"
+        }
     }
 }
 
