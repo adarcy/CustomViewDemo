@@ -26,14 +26,6 @@ uploadArchives {
 //            repository(url:"http://10.60.0.100:8081/repository/okayclient_snapshot") {
 //                authentication(userName: "lichao", password: "123456")
 //            }
-            def deployPath = file("../repo")
-            repository(url: "file://${deployPath.absolutePath}")
-
-            pom.project {
-                groupId "com.syxl.maven"
-                artifactId "maven"
-                version "0.0.3"
-            }
         }
     }
 }
