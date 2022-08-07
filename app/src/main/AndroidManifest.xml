@@ -15,10 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activity.ViewListActivity"
+            android:exported="false" />
+
         <service
             android:name=".MyService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity android:name=".KotlinActivity" />
         <activity android:name=".MainActivity">
@@ -43,10 +47,10 @@
         <activity android:name=".TestActivity" />
         <activity android:name=".WebViewActivity" />
         <activity android:name=".itemDecorator.ItemDecorationActivity" />
-        <activity android:name=".elemenestedscroll.ElemeActivity"/>
-        <activity android:name=".views.ballview.BallViewActivity"/>
-        <activity android:name=".LooperPrinterActivity"/>
-        <activity android:name=".activity.RxJava2Activity"/>
+        <activity android:name=".elemenestedscroll.ElemeActivity" />
+        <activity android:name=".views.ballview.BallViewActivity" />
+        <activity android:name=".LooperPrinterActivity" />
+        <activity android:name=".activity.RxJava2Activity" />
     </application>
 
 </manifest>

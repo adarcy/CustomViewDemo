@@ -26,6 +26,7 @@ import com.syxl.customviewdemo.DragScrollDetailsLayout.DragScrollDetailsLayoutAc
 import com.syxl.customviewdemo.GALeafLoading.LeafLoadingActivity
 import com.syxl.customviewdemo.activity.RxJava2Activity
 import com.syxl.customviewdemo.activity.ScrollerViewPagerActivity
+import com.syxl.customviewdemo.activity.ViewListActivity
 import com.syxl.customviewdemo.base.MenuAdapter
 import com.syxl.customviewdemo.base.MenuBean
 import com.syxl.customviewdemo.captcha.CaptchaActivity
@@ -36,13 +37,9 @@ import com.syxl.customviewdemo.itemDecorator.ItemDecorationActivity
 import com.syxl.customviewdemo.rvimageads.RvimageadsActivity
 import com.syxl.customviewdemo.span.SpanActivity
 import com.syxl.customviewdemo.views.ballview.BallViewActivity
-import hugo.weaving.DebugLog
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
-import java.io.FileOutputStream
 import java.io.IOException
-import java.security.Permissions
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -52,7 +49,6 @@ class MainActivity : AppCompatActivity() {
     private val flist: ArrayList<User> = ArrayList()
     private val TAG = "MainActivity"
 
-    @DebugLog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -73,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         list.add(MenuBean("BallView", BallViewActivity::class.java))
         list.add(MenuBean("LooperPrinter", LooperPrinterActivity::class.java))
         list.add(MenuBean("RxJava2", RxJava2Activity::class.java))
+        list.add(MenuBean("自定义view", ViewListActivity::class.java))
 
         rv_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_list.adapter = MenuAdapter(this@MainActivity, list)

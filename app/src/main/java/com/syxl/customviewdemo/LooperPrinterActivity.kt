@@ -62,28 +62,28 @@ class LooperPrinterActivity : AppCompatActivity(){
             scaleY.start()
         }
 
-        Looper.getMainLooper().setMessageLogging(object : Printer {
-            private val START = ">>>>> Dispatching"
-            private val END = "<<<<< Finished"
-            private var time = -1L
-
-            override fun println(x: String?) {
-                if (x?.startsWith(START) == true) {
-                    //从这里开启一个定时任务来打印方法的堆栈信息
-                    LooperLog.instance.startPrintLog()
-                }
-                if (x?.startsWith(END) == true) {
-                    //从这里取消定时任务
-                    LooperLog.instance.canclePrintLog()
-
-//                    if ((System.currentTimeMillis() - time) > 200){
-//                        if (x?.contains("FrameHandler") != true){
-//                            Log.e("printer", "==println==$x");
-//                        }
-//                    }
-                }
-            }
-        })
+//        Looper.getMainLooper().setMessageLogging(object : Printer {
+//            private val START = ">>>>> Dispatching"
+//            private val END = "<<<<< Finished"
+//            private var time = -1L
+//
+//            override fun println(x: String?) {
+//                if (x?.startsWith(START) == true) {
+//                    //从这里开启一个定时任务来打印方法的堆栈信息
+//                    LooperLog.instance.startPrintLog()
+//                }
+//                if (x?.startsWith(END) == true) {
+//                    //从这里取消定时任务
+//                    LooperLog.instance.canclePrintLog()
+//
+////                    if ((System.currentTimeMillis() - time) > 200){
+////                        if (x?.contains("FrameHandler") != true){
+////                            Log.e("printer", "==println==$x");
+////                        }
+////                    }
+//                }
+//            }
+//        })
     }
 
 }

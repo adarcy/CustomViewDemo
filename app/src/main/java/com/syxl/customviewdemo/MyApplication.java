@@ -1,8 +1,8 @@
 package com.syxl.customviewdemo;
 
 import android.app.Application;
+import android.support.multidex.MultiDex;
 
-import androidx.multidex.MultiDex;
 
 import com.syxl.customviewdemo.utils.ActivityThreadHelper;
 import com.syxl.customviewdemo.utils.SafeToastService;
@@ -28,6 +28,6 @@ public class MyApplication extends Application {
         ActivityThreadHelper.tryHackActivityThreadH();
 
         //        BlockCanary.install(this, BlockCanaryContext()).start()
-        Pandora.get().open();
+//        Pandora.get().open();
     }
 }

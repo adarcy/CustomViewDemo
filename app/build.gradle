@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.jakewharton.hugo'
 //apply plugin: 'com.nzy.plugin'
 
 
@@ -10,7 +9,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.syxl.customviewdemo"
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -29,9 +28,6 @@ android {
         sourceCompatibility = "8"
     }
 
-//    hugo {
-//    enabled false
-//    }
 
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
@@ -82,7 +78,7 @@ dependencies {
 //    implementation 'org.ow2.asm:asm-commons:9.1'
 
 //    implementation project(":mavenpublishlibrary")
-    implementation 'com.syxl.maven:maven:0.0.3'
+//    implementation 'com.syxl.maven:maven:0.0.3'
 
 
 
